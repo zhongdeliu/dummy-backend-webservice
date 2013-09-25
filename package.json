@@ -1,0 +1,30 @@
+{
+  "name": "dummy-backend-service",
+  "version": "0.0.0",
+  "description": "Dummy Backend for a webservice mockup",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhongdeliu/dummy-backend-webservice"
+  },
+  "scripts": {"start": "node index.js"},
+  "keywords": [
+    "node",
+    "rest",
+    "javascript",
+    "json",
+    "mock",
+    "mockup",
+    "webservice",
+    "service",
+    "dummy",
+    "data"
+  ],
+  "author": "zhongdeliu",
+  "license": "MIT",
+  "dependencies": {
+    "express": "3.x",
+    "Faker": "0.x"
+  }
+}
