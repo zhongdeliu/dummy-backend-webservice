@@ -12,7 +12,7 @@ app.get('/brands', function(req, res) {
   for (var i = 0; i < Faker.Helpers.randomNumber(100) % 10 + 10; i++) {
     output.push({
       id: "0" + Faker.Helpers.randomNumber(999999),
-      title: Faker.Company.companyName(),
+      name: Faker.Company.companyName(),
       image: 'http://placehold.it/100x100'
     });
   }
@@ -31,7 +31,7 @@ app.get('/categories', function(req, res) {
   for (var i = 0; i < Faker.Helpers.randomNumber(100) % 5 + 5; i++) {
     output.push({
       id: "5" + Faker.Helpers.randomNumber(999999),
-      title: Faker.Name.lastName(),
+      name: Faker.Name.lastName(),
       image: 'http://placehold.it/100x100'
     });
   }
@@ -45,6 +45,43 @@ app.get('/categories', function(req, res) {
   res.end(body);
 });
 
+app.get('/items/:id?/:brand?/:category?', function(req, res) {
+  var category = Number(req.params.category);
+  var brand = Number(req.params.brand);
+  var id = Number(req.params.id);
+  var item = {};
+  
+  var output = [];
+  for (var i = 0; i < Faker.Helpers.randomNumber(100) + 20; i++) {
+      item = {
+      id: "9" + Faker.Helpers.randomNumber(999999),
+      category_id: "5" + Faker.Helpers.randomNumber(999999),
+      brand_id: "0" + Faker.Helpers.randomNumber(999999),
+      name: Faker.Name.lastName(),
+      description_short: Faker.Lorem.sentence(),
+      description_long: Faker.Lorem.sentences(),
+      image: 'http://placehold.it/100x100'
+    };
+    if (id && !isNaN(id)) {
+        item.id = id;
+    }
+    if (brand && !isNaN(brand)) {
+        item.brand_id = brand;
+    }
+    if (category && !isNaN(category)) {
+        item.category_id = category;
+    }
+    output.push(item);
+  }
+  var body = JSON.stringify(output);
+
+  res.writeHead(200, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+  });
+
+  res.end(body);
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port);
