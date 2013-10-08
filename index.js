@@ -9,13 +9,24 @@ app.get('/', function(req, res) {
 
 app.get('/brands', function(req, res) {
   var output = [];
-  for (var i = 0; i < Faker.Helpers.randomNumber(100) % 10 + 10; i++) {
-    output.push({
+  var item = {};
+  for (var i = 0; i < 10; i++) {
+    item = {
       id: "0" + Faker.Helpers.randomNumber(999999),
       name: Faker.Company.companyName(),
-      image: 'http://placehold.it/100x100'
-    });
+      image: 'placeholder_brand.jpg',
+      series: []
+    };
+    for (var j = 0; j < Faker.Helpers.randomNumber(100) % 10 + 5; j++) {
+        item.series.push({
+            id: "1" + Faker.Helpers.randomNumber(999999),
+            name: Faker.Name.lastName(),
+            image: 'placeholder_series.jpg'
+        });
+    }
+    output.push(item);
   }
+  
   var body = JSON.stringify(output);
 
   res.writeHead(200, {
